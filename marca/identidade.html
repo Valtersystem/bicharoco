@@ -1,0 +1,275 @@
+<title>Bicharoco — Identidade de Marca</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Figtree:wght@400;500;700;800&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: quadro de marca vertical — folha branca "Normal", cor de filamento "Imaginarium", bichinho com olhos "Adventure Time" */
+:root{
+  --paper:#FFFFFF; --ink:#18181D; --soft:#F3F2F7; --line:#E2E0EA; --muted:#5E5C6B;
+  --limao:#FFD23F; --chiclete:#FF6FAE; --ceu:#3EC1F3; --menta:#3DD598; --laranja:#FF8A3D;
+  --on-color:#18181D;
+  --f-display:"Bagel Fat One","Arial Rounded MT Bold",system-ui,sans-serif;
+  --f-body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#141418; --ink:#F4F3F8; --soft:#1E1E25; --line:#2F2E39; --muted:#A9A7B7; color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#141418; --ink:#F4F3F8; --soft:#1E1E25; --line:#2F2E39; --muted:#A9A7B7; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;padding-inline:20px;padding-block:0 64px}
+.wrap{max-width:1040px;margin:0 auto;display:grid;gap:72px}
+h1,h2,h3{text-wrap:balance;margin:0;line-height:1.1}
+h2{font-family:var(--f-display);font-weight:400;font-size:clamp(28px,4vw,40px)}
+h3{font-size:18px;font-weight:800}
+p{margin:0;max-width:62ch}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+section{display:grid;gap:24px}
+.sec-head{display:grid;gap:8px}
+
+/* HERO */
+.hero{padding-block:56px 8px;display:grid;gap:28px}
+.logo-stage{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.wordmark{font-family:var(--f-display);font-size:clamp(56px,11vw,128px);line-height:.9;letter-spacing:-.01em}
+.wordmark .dot{color:var(--chiclete)}
+.blob{width:clamp(70px,10vw,110px);aspect-ratio:1;max-width:100%;background:var(--limao);border:4px solid var(--ink);
+  border-radius:58% 42% 50% 50% / 55% 50% 50% 45%;position:relative;flex:none;animation:wob 4s ease-in-out infinite}
+.blob::before,.blob::after{content:"";position:absolute;top:38%;width:13%;aspect-ratio:1;background:var(--ink);border-radius:50%}
+.blob::before{left:30%} .blob::after{right:30%}
+.blob i{position:absolute;left:50%;top:58%;width:22%;height:11%;border:3px solid var(--ink);border-top:0;border-radius:0 0 20px 20px;transform:translateX(-50%)}
+@keyframes wob{50%{border-radius:45% 55% 45% 55% / 50% 45% 55% 50%;transform:rotate(-4deg)}}
+@media (prefers-reduced-motion:reduce){.blob{animation:none}}
+.tagline{font-size:clamp(20px,2.6vw,26px);font-weight:700;max-width:30ch}
+.picker{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.picker span{font-size:14px;color:var(--muted);margin-right:4px}
+.picker button{font:700 15px var(--f-body);padding:8px 14px;border-radius:999px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
+.picker button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.picker button:focus-visible{outline:3px solid var(--ceu);outline-offset:2px}
+
+/* MISTURA */
+.mix{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.ref{border:2px solid var(--ink);border-radius:18px;padding:22px;display:grid;gap:10px;align-content:start}
+.ref .tag{justify-self:start;font:700 13px var(--f-body);padding:4px 10px;border-radius:999px;color:var(--on-color)}
+.ref ul{margin:0;padding-left:18px;display:grid;gap:4px}
+.ref .no{font-size:14px;color:var(--muted);border-top:1px dashed var(--line);padding-top:10px}
+.formula{font-family:var(--f-display);font-size:clamp(22px,3vw,30px);text-align:center;padding:18px;background:var(--soft);border-radius:18px}
+
+/* NOMES */
+.names{display:grid;gap:0;border-top:2px solid var(--ink)}
+.name-row{display:grid;grid-template-columns:minmax(150px,220px) 1fr auto;gap:20px;align-items:baseline;padding-block:18px;border-bottom:1px solid var(--line)}
+.name-row b{font-family:var(--f-display);font-weight:400;font-size:30px}
+.name-row .why{min-width:0}
+.score{font-family:var(--f-mono);font-size:13px;color:var(--muted);white-space:nowrap}
+.name-row.top b{color:var(--chiclete)}
+@media (max-width:640px){.name-row{grid-template-columns:1fr}}
+
+/* CORES */
+.swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+.sw{border-radius:16px;overflow:hidden;border:2px solid var(--ink)}
+.sw .chip{height:96px}
+.sw .meta{padding:10px 12px;display:grid;gap:2px;background:var(--paper)}
+.sw .meta b{font-size:15px}
+.sw .meta code{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+
+/* TIPO */
+.type{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.type .card{background:var(--soft);border-radius:18px;padding:24px;display:grid;gap:10px}
+.type .big{font-family:var(--f-display);font-size:56px;line-height:1}
+.type .body{font-size:22px;font-weight:800}
+
+/* PRODUTOS */
+.shelf{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.prod{border:2px solid var(--ink);border-radius:18px;overflow:hidden;display:grid;grid-template-rows:auto 1fr}
+.prod .img{aspect-ratio:4/3;max-width:100%;display:grid;place-items:center;font-size:44px;font-family:var(--f-display);color:var(--on-color)}
+.prod .info{padding:14px;display:grid;gap:6px;align-content:start}
+.prod .info p{font-size:14px;color:var(--muted)}
+.price{font-family:var(--f-display);font-size:34px;line-height:1;font-variant-numeric:tabular-nums}
+.price small{font-size:18px}
+.buy{justify-self:start;font:800 14px var(--f-body);padding:8px 14px;border-radius:999px;background:var(--ink);color:var(--paper);border:0;margin-top:4px}
+
+/* VOZ */
+.voice{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.say{border-radius:18px;padding:20px;display:grid;gap:8px}
+.say.yes{background:var(--soft)}
+.say.not{border:2px dashed var(--line)}
+.say q{font-size:18px;font-weight:700;quotes:"“" "”"}
+.say.not q{color:var(--muted);text-decoration:line-through;text-decoration-thickness:1px}
+
+/* AVISO + PASSOS */
+.warn{border-left:6px solid var(--laranja);background:var(--soft);padding:20px 22px;border-radius:0 16px 16px 0;display:grid;gap:8px}
+.steps{margin:0;padding-left:22px;display:grid;gap:10px}
+.steps li::marker{font-family:var(--f-display);color:var(--chiclete)}
+footer{font-size:14px;color:var(--muted);border-top:1px solid var(--line);padding-top:20px}
+</style>
+
+<div class="wrap">
+
+  <header class="hero">
+    <span class="eyebrow">Proposta de identidade · v1 · loja de impressão 3D · Portugal</span>
+    <div class="logo-stage">
+      <div class="blob" aria-hidden="true"><i></i></div>
+      <h1 class="wordmark" id="wm">bicharoco<span class="dot">.</span></h1>
+    </div>
+    <p class="tagline">Coisas pequenas, feitas camada a camada, com imaginação a mais.</p>
+    <div class="picker" role="group" aria-label="Pré-visualizar outro nome">
+      <span>Ver o logo com:</span>
+      <button id="n1" aria-pressed="false" data-n="coisinhas">coisinhas</button>
+      <button id="n2" aria-pressed="false" data-n="plim">plim</button>
+      <button id="n3" aria-pressed="false" data-n="camadinha">camadinha</button>
+      <button id="n4" aria-pressed="true" data-n="bicharoco">bicharoco</button>
+      <button id="n5" aria-pressed="false" data-n="tralha boa">tralha boa</button>
+    </div>
+  </header>
+
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">A mistura</span>
+      <h2>O que tiramos de cada referência</h2>
+      <p>Não copiamos nenhuma das três. Pegamos numa ideia de cada uma e juntamos numa marca que é só vossa.</p>
+    </div>
+    <div class="mix">
+      <article class="ref">
+        <span class="tag" style="background:var(--ceu)">Adventure Time</span>
+        <h3>A alma</h3>
+        <ul>
+          <li>Mundo inventado, bichinhos com olhos em tudo</li>
+          <li>Cores de rebuçado, formas moles e tortas</li>
+          <li>Humor absurdo e carinhoso</li>
+        </ul>
+        <p class="no">Não usamos: personagens, nome ou desenhos da série.</p>
+      </article>
+      <article class="ref">
+        <span class="tag" style="background:var(--limao)">Normal</span>
+        <h3>A clareza</h3>
+        <ul>
+          <li>Fundo branco, letra preta e grossa</li>
+          <li>Preço enorme e fácil de ler</li>
+          <li>Coisas do dia a dia, baratas, sem complicar</li>
+        </ul>
+        <p class="no">Não usamos: o nome nem o logótipo.</p>
+      </article>
+      <article class="ref">
+        <span class="tag" style="background:var(--chiclete)">Imaginarium</span>
+        <h3>O presente</h3>
+        <ul>
+          <li>Objetos com personalidade, que dão vontade de oferecer</li>
+          <li>Design divertido para casa e secretária</li>
+          <li>Embalagem que já é presente</li>
+        </ul>
+        <p class="no">Não usamos: o nome nem os produtos deles.</p>
+      </article>
+    </div>
+    <p class="formula">imaginação de desenho animado + preço de loja normal = presente pequeno</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Nome</span>
+      <h2>Cinco nomes para escolher</h2>
+      <p>Todos em português, curtos e fáceis de dizer. Antes de decidir, confirmem que o domínio e o @ do Instagram estão livres.</p>
+    </div>
+    <div class="names">
+      <div class="name-row top"><b>coisinhas</b><p class="why">Vem da vossa própria frase, "vender coisinhas pequenas". Simples como a Normal e fofo como o resto. A minha preferida.</p><span class="score">PT ✓ BR ✓</span></div>
+      <div class="name-row"><b>plim</b><p class="why">O som de algo mágico a aparecer, como a peça a sair da impressora. Muito curto e fácil de transformar em logo.</p><span class="score">PT ✓ BR ✓</span></div>
+      <div class="name-row"><b>camadinha</b><p class="why">A impressão 3D faz-se camada a camada. Explica o ofício com carinho.</p><span class="score">PT ✓ BR ✓</span></div>
+      <div class="name-row"><b>bicharoco</b><p class="why">Um bicho esquisito e simpático. É o que tem mais a ver com Adventure Time.</p><span class="score">PT ✓ BR ~</span></div>
+      <div class="name-row"><b>tralha boa</b><p class="why">Humor português: aquela tralha que se quer mesmo ter. Ousado e memorável.</p><span class="score">PT ✓ BR ~</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Cores</span>
+      <h2>Base preto e branco, cor só nos produtos</h2>
+      <p>O site é limpo como a Normal. A cor vem dos filamentos, por isso cada produto ganha uma das cores abaixo. Comprem filamento nestes tons e a loja fica coerente sem esforço.</p>
+    </div>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:var(--ink)"></div><div class="meta"><b>Tinta</b><code>#18181D</code></div></div>
+      <div class="sw"><div class="chip" style="background:#FFFFFF"></div><div class="meta"><b>Papel</b><code>#FFFFFF</code></div></div>
+      <div class="sw"><div class="chip" style="background:var(--limao)"></div><div class="meta"><b>Limão</b><code>#FFD23F</code></div></div>
+      <div class="sw"><div class="chip" style="background:var(--chiclete)"></div><div class="meta"><b>Chiclete</b><code>#FF6FAE</code></div></div>
+      <div class="sw"><div class="chip" style="background:var(--ceu)"></div><div class="meta"><b>Céu</b><code>#3EC1F3</code></div></div>
+      <div class="sw"><div class="chip" style="background:var(--menta)"></div><div class="meta"><b>Menta</b><code>#3DD598</code></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Letra</span>
+      <h2>Uma letra gorda e uma letra limpa</h2>
+    </div>
+    <div class="type">
+      <div class="card"><span class="eyebrow">Títulos e preços · Bagel Fat One</span><span class="big">Olá, coisa!</span><p>Redonda e fofa, parece feita de plástico mole. Só para o logo, títulos e preços.</p></div>
+      <div class="card"><span class="eyebrow">Texto · Figtree</span><span class="body">Porta-chaves com o teu nome, pronto em 2 dias.</span><p>Limpa e fácil de ler no telemóvel. Para descrições, botões e tudo o resto. As duas são gratuitas no Google Fonts.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Na prática</span>
+      <h2>Assim fica a montra</h2>
+      <p>Exemplos de produtos e preços para mostrar o estilo. Os valores são sugestões, ainda não estão decididos.</p>
+    </div>
+    <div class="shelf">
+      <div class="prod"><div class="img" style="background:var(--limao)">ANA</div><div class="info"><h3>Porta-chaves com nome</h3><p>Escolhes o nome e a cor.</p><span class="price">6<small> €</small></span><span class="buy">Comprar</span></div></div>
+      <div class="prod"><div class="img" style="background:var(--ceu)">◆◇◆</div><div class="info"><h3>Bases de azulejo (4)</h3><p>Padrão de azulejo português.</p><span class="price">12<small> €</small></span><span class="buy">Comprar</span></div></div>
+      <div class="prod"><div class="img" style="background:var(--chiclete)">• ᴗ •</div><div class="info"><h3>Bichinho de secretária</h3><p>Segura o telemóvel e sorri.</p><span class="price">9<small> €</small></span><span class="buy">Comprar</span></div></div>
+      <div class="prod"><div class="img" style="background:var(--menta)">∿∿</div><div class="info"><h3>Organizador de cabos</h3><p>Pack de 6, cores à sorte.</p><span class="price">5<small> €</small></span><span class="buy">Comprar</span></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Voz</span>
+      <h2>Como a marca fala</h2>
+      <p>Trata o cliente por tu, é curta e tem uma pitada de absurdo. Nunca é corporativa.</p>
+    </div>
+    <div class="voice">
+      <div class="say yes"><span class="eyebrow">Assim</span><q>Este bicho guarda as tuas chaves. Não guarda segredos.</q></div>
+      <div class="say not"><span class="eyebrow">Assim não</span><q>Produto de elevada qualidade fabricado com tecnologia aditiva.</q></div>
+      <div class="say yes"><span class="eyebrow">Assim</span><q>Saiu da impressora quentinho. Chega a tua casa em 3 dias.</q></div>
+      <div class="say not"><span class="eyebrow">Assim não</span><q>Prazo de expedição estimado: 72 horas úteis.</q></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="warn">
+      <h3>Cuidado com as marcas registadas</h3>
+      <p>Adventure Time, Normal e Imaginarium são marcas registadas. Inspirarem-se no estilo é seguro. Usar o nome, o logo ou as personagens delas não é: o Stripe, o Etsy e o Instagram podem bloquear a conta, e a marca pode avançar com processo. Fiquem pelo estilo.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Próximos passos</span>
+      <h2>Para fechar a marca</h2>
+    </div>
+    <ol class="steps">
+      <li>Escolher um nome, ou mandar outras ideias para eu ajustar.</li>
+      <li>Ver se o domínio <code>.pt</code> está livre (pt.pt) e o @ no Instagram e no TikTok.</li>
+      <li>Pesquisar o nome no INPI, o registo de marcas em Portugal, para não chocar com nenhuma marca existente.</li>
+      <li>Imprimir o bichinho do logo como primeira peça. Serve de mascote e de foto para as redes.</li>
+      <li>Construir o site com esta identidade e os botões do Stripe Payment Links.</li>
+    </ol>
+  </section>
+
+  <footer>Proposta preparada para discutirem entre os dois. Nada aqui está fechado.</footer>
+</div>
+
+<script>
+(function(){
+  var wm=document.getElementById('wm');
+  var btns=document.querySelectorAll('.picker button');
+  btns.forEach(function(b){
+    b.addEventListener('click',function(){
+      btns.forEach(function(x){x.setAttribute('aria-pressed','false')});
+      b.setAttribute('aria-pressed','true');
+      wm.innerHTML='';
+      wm.appendChild(document.createTextNode(b.dataset.n));
+      var d=document.createElement('span');d.className='dot';d.textContent='.';wm.appendChild(d);
+      try{localStorage.setItem('marca-nome',b.id)}catch(e){}
+    });
+  });
+  try{var s=localStorage.getItem('marca-nome');if(s&&document.getElementById(s))document.getElementById(s).click()}catch(e){}
+})();
+</script>
