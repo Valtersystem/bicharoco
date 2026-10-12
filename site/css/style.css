@@ -99,7 +99,7 @@ p { margin: 0; }
 .seccao-suave { background: var(--suave); }
 
 /* Produtos */
-.grelha { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+.grelha { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr)); gap: 20px; }
 .produto { border: 2px solid var(--tinta); border-radius: var(--raio); overflow: hidden; display: grid; grid-template-rows: auto 1fr; background: var(--papel); }
 .produto-foto { position: relative; aspect-ratio: 1; display: grid; place-items: center; border-bottom: 2px solid var(--tinta); }
 .produto-foto img:not(.produto-placeholder) { width: 100%; height: 100%; object-fit: cover; }
@@ -119,7 +119,7 @@ p { margin: 0; }
 .produto .botao { padding: 10px 16px; font-size: 15px; }
 
 /* Como funciona */
-.passos { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; list-style: none; padding: 0; margin: 0; counter-reset: passo; }
+.passos { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 20px; list-style: none; padding: 0; margin: 0; counter-reset: passo; }
 .passos li { counter-increment: passo; background: var(--papel); border-radius: var(--raio); padding: 24px; display: grid; gap: 8px; align-content: start; }
 .passos li::before { content: counter(passo); font-family: var(--f-titulo); font-size: 40px; line-height: 1; color: var(--chiclete); }
 .passos h3 { font-size: 19px; font-weight: 800; }
@@ -144,7 +144,7 @@ p { margin: 0; }
 
 /* Rodapé */
 .rodape { background: var(--tinta); color: var(--papel); padding-block: 48px 32px; }
-.rodape .contentor { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px; }
+.rodape .contentor { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 28px; }
 .rodape h3 { font-size: 15px; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; color: var(--limao); }
 .rodape p, .rodape li { font-size: 15px; color: #cfcdd9; }
 .rodape ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
