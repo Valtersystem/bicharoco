@@ -9,7 +9,7 @@ services:
       APP_ENV: production
       APP_DEBUG: "false"
     volumes:
-      - ${BICHAROCO_DATA_DIR:-/srv/volumes/bicharoco}/database:/var/www/html/database
+      - ${BICHAROCO_DATA_DIR:-/srv/volumes/bicharoco}/database.sqlite:/var/www/html/database/database.sqlite
       - ${BICHAROCO_DATA_DIR:-/srv/volumes/bicharoco}/storage:/var/www/html/storage
       - ${BICHAROCO_DATA_DIR:-/srv/volumes/bicharoco}/bootstrap-cache:/var/www/html/bootstrap/cache
     networks:
