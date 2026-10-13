@@ -32,7 +32,7 @@ Testes: `php artisan test`
 2. Abram cada produto no painel e carreguem em **Guardar**, ou usem **Sincronizar** na lista. O link de pagamento aparece sozinho.
 3. Para receber as vendas no computador, instalem o [Stripe CLI](https://docs.stripe.com/stripe-cli) e corram:
    ```bash
-   stripe listen --forward-to localhost:8000/stripe/webhook
+   stripe listen --forward-to localhost:8000/stripe/webhook --events checkout.session.completed,checkout.session.async_payment_succeeded,checkout.session.async_payment_failed,charge.updated
    ```
    Copiem o `whsec_...` que aparece para `STRIPE_WEBHOOK_SECRET`.
 4. Façam uma compra na loja com o cartão `4242 4242 4242 4242`. A encomenda aparece em **Encomendas → A imprimir**.
@@ -74,7 +74,7 @@ O que é preciso: PHP 8.4 (com as extensões `mbstring`, `xml`, `curl`, `intl`, 
 5. **Nginx:** o `root` aponta para `/var/www/bicharoco/loja/public`, com a configuração padrão de Laravel (https://laravel.com/docs/deployment#nginx). Depois: `sudo certbot --nginx -d bicharoco.pt -d www.bicharoco.pt`.
 6. **Webhook no Stripe:** em Developers → Webhooks → Add endpoint:
    - URL: `https://bicharoco.pt/stripe/webhook`
-   - Eventos: `checkout.session.completed`, `checkout.session.async_payment_succeeded`, `checkout.session.async_payment_failed`
+   - Eventos: `checkout.session.completed`, `checkout.session.async_payment_succeeded`, `checkout.session.async_payment_failed`, `charge.updated`
    - Copiem o *Signing secret* para `STRIPE_WEBHOOK_SECRET` e corram `php artisan optimize` outra vez.
 7. **Links do Stripe:** na lista de produtos, carreguem em **Sincronizar** em cada um. Assim os links passam a voltar para `https://bicharoco.pt/obrigado` e as fotos aparecem no checkout.
 

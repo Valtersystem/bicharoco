@@ -17,6 +17,9 @@ use Stripe\Webhook;
  * Cartão: checkout.session.completed já vem pago.
  * MB WAY / Multibanco: chega primeiro sem pagamento e depois vem
  * checkout.session.async_payment_succeeded (ou _failed).
+ *
+ * A comissão do Stripe só fica calculada uns segundos depois do pagamento;
+ * nessa altura chega um charge.updated e guardamo-la.
  */
 class StripeWebhookController extends Controller
 {
@@ -32,12 +35,13 @@ class StripeWebhookController extends Controller
             return response('Assinatura inválida', 400);
         }
 
-        $session = $event->data->object->toArray();
+        $object = $event->data->object->toArray();
 
         match ($event->type) {
-            'checkout.session.completed' => $this->record($session),
-            'checkout.session.async_payment_succeeded' => $this->record($session),
-            'checkout.session.async_payment_failed' => $this->cancel($session),
+            'checkout.session.completed' => $this->record($object),
+            'checkout.session.async_payment_succeeded' => $this->record($object),
+            'checkout.session.async_payment_failed' => $this->cancel($object),
+            'charge.updated' => $this->recordFee($object),
             default => null,
         };
 
@@ -97,6 +101,21 @@ class StripeWebhookController extends Controller
     {
         Order::where('stripe_session_id', $session['id'])
             ->update(['status' => OrderStatus::Cancelada]);
+    }
+
+    private function recordFee(array $charge): void
+    {
+        if (empty($charge['balance_transaction']) || empty($charge['payment_intent'])) {
+            return;
+        }
+
+        $order = Order::where('stripe_payment_intent_id', $charge['payment_intent'])
+            ->whereNull('stripe_fee_cents')
+            ->first();
+
+        if ($order) {
+            $order->update(['stripe_fee_cents' => $this->fee($charge['payment_intent'])]);
+        }
     }
 
     private function fee(?string $paymentIntentId): ?int

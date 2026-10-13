@@ -85,6 +85,18 @@ class StripeWebhookTest extends TestCase
         $this->assertSame(OrderStatus::Cancelada, Order::sole()->status);
     }
 
+    public function test_charge_sem_encomenda_ou_sem_balance_transaction_e_ignorado(): void
+    {
+        $this->send('charge.updated', ['id' => 'ch_1', 'object' => 'charge', 'payment_intent' => 'pi_nada', 'balance_transaction' => 'txn_1'])
+            ->assertOk();
+
+        $this->send('checkout.session.completed', $this->checkoutSession());
+        $this->send('charge.updated', ['id' => 'ch_1', 'object' => 'charge', 'payment_intent' => 'pi_123', 'balance_transaction' => null])
+            ->assertOk();
+
+        $this->assertNull(Order::sole()->stripe_fee_cents);
+    }
+
     public function test_lucro_da_encomenda(): void
     {
         $order = new Order([
