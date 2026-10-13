@@ -1,0 +1,44 @@
+services:
+  app:
+    build:
+      context: ./loja
+      dockerfile: docker/php/Dockerfile
+      target: application
+    image: bicharoco-app:latest
+    container_name: bicharoco_app
+    restart: unless-stopped
+    env_file:
+      - ${APP_ENV_FILE:-.env.production}
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "false"
+    volumes:
+      - ${BICHAROCO_DATA_DIR:-/srv/volumes/bicharoco}/database:/var/www/html/database
+      - ${BICHAROCO_DATA_DIR:-/srv/volumes/bicharoco}/storage:/var/www/html/storage
+      - ${BICHAROCO_DATA_DIR:-/srv/volumes/bicharoco}/bootstrap-cache:/var/www/html/bootstrap/cache
+    networks:
+      - internal
+
+  web:
+    build:
+      context: ./loja
+      dockerfile: docker/php/Dockerfile
+      target: web
+    image: bicharoco-web:latest
+    container_name: bicharoco_web
+    restart: unless-stopped
+    depends_on:
+      - app
+    volumes:
+      - ${BICHAROCO_DATA_DIR:-/srv/volumes/bicharoco}/storage:/var/www/html/storage:ro
+    networks:
+      - internal
+      - proxy
+
+networks:
+  internal:
+    driver: bridge
+  proxy:
+    external: true
+    name: proxy_default
+

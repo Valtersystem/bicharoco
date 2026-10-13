@@ -1,0 +1,47 @@
+name: Publicar loja na VPS
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "loja/**"
+      - "docker-compose.production.yml"
+      - ".github/workflows/deploy-vps.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: bicharoco-production
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://bicharoco.sevenfaithtech.com/
+
+    steps:
+      - name: Preparar acesso SSH restrito
+        env:
+          VPS_HOST_KEY: ${{ secrets.VPS_HOST_KEY }}
+          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+        run: |
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$VPS_SSH_KEY" > ~/.ssh/bicharoco_deploy
+          printf '%s\n' "$VPS_HOST_KEY" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/bicharoco_deploy ~/.ssh/known_hosts
+
+      - name: Publicar commit na VPS
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+        run: |
+          ssh \
+            -i ~/.ssh/bicharoco_deploy \
+            -o BatchMode=yes \
+            "$VPS_USER@$VPS_HOST" \
+            "deploy $GITHUB_SHA"
+
