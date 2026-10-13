@@ -15,6 +15,7 @@ concurrency:
 
 permissions:
   contents: read
+  packages: write
 
 jobs:
   deploy:
@@ -24,6 +25,45 @@ jobs:
       url: https://bicharoco.sevenfaithtech.com/
 
     steps:
+      - name: Obter código
+        uses: actions/checkout@v4
+
+      - name: Preparar Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Entrar no GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Construir e publicar imagem da aplicação
+        uses: docker/build-push-action@v6
+        with:
+          context: ./loja
+          file: ./loja/docker/php/Dockerfile
+          target: application
+          push: true
+          tags: |
+            ghcr.io/valtersystem/bicharoco-app:${{ github.sha }}
+            ghcr.io/valtersystem/bicharoco-app:latest
+          cache-from: type=gha,scope=bicharoco-application
+          cache-to: type=gha,mode=max,scope=bicharoco-application
+
+      - name: Construir e publicar imagem web
+        uses: docker/build-push-action@v6
+        with:
+          context: ./loja
+          file: ./loja/docker/php/Dockerfile
+          target: web
+          push: true
+          tags: |
+            ghcr.io/valtersystem/bicharoco-web:${{ github.sha }}
+            ghcr.io/valtersystem/bicharoco-web:latest
+          cache-from: type=gha,scope=bicharoco-application
+          cache-to: type=gha,mode=max,scope=bicharoco-web
+
       - name: Preparar acesso SSH restrito
         env:
           VPS_HOST_KEY: ${{ secrets.VPS_HOST_KEY }}

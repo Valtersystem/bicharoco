@@ -1,10 +1,6 @@
 services:
   app:
-    build:
-      context: ./loja
-      dockerfile: docker/php/Dockerfile
-      target: application
-    image: bicharoco-app:latest
+    image: ghcr.io/valtersystem/bicharoco-app:${IMAGE_TAG:-latest}
     container_name: bicharoco_app
     restart: unless-stopped
     env_file:
@@ -20,11 +16,7 @@ services:
       - internal
 
   web:
-    build:
-      context: ./loja
-      dockerfile: docker/php/Dockerfile
-      target: web
-    image: bicharoco-web:latest
+    image: ghcr.io/valtersystem/bicharoco-web:${IMAGE_TAG:-latest}
     container_name: bicharoco_web
     restart: unless-stopped
     depends_on:
