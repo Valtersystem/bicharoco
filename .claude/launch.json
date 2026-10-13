@@ -6,6 +6,12 @@
       "runtimeExecutable": "python3",
       "runtimeArgs": ["-m", "http.server", "8080", "--directory", "site"],
       "port": 8080
+    },
+    {
+      "name": "loja",
+      "runtimeExecutable": "php",
+      "runtimeArgs": ["loja/artisan", "serve", "--port=8000"],
+      "port": 8000
     }
   ]
 }
